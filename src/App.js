@@ -5,7 +5,7 @@ import { fetchWeather } from "./utils/weatherApi";
 // import components
 import Form from "./components/Form";
 import List from "./components/List";
-
+import Heading from "./components/Heading";
 export default function App() {
   // localStorage
   const [activities, setActivities] = useLocalStorageState("activities", {
@@ -53,6 +53,11 @@ export default function App() {
 
   return (
     <div className="App">
+      {weather ? (
+        <Heading>{`${weather?.condition} - ${weather.temperature} `}</Heading>
+      ) : (
+        ""
+      )}
       <List weather={weather} activities={filteredActivities} />
       <Form onAddActivity={handleAddActivity} />
     </div>
