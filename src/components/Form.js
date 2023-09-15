@@ -8,8 +8,15 @@ export default function Form({ onAddActivity }) {
     event.preventDefault();
 
     const form = new FormData(event.target);
-    const data = Object.fromEntries(form.entries());
-    console.log(data);
+
+    const newData = {
+      name: form.get("name"),
+      isForGoodWeather: form.get("isForGoodWeather") ? true : false,
+    };
+
+    onAddActivity(newData);
+    event.target.reset();
+    event.target.name.focus();
   }
 
   return (
@@ -35,7 +42,6 @@ export default function Form({ onAddActivity }) {
             name="isForGoodWeather"
             id="goodWeatherActivity"
             type="checkbox"
-            value="true"
             aria-labelledby="goodWeatherLabel"
           />
         </fieldset>
