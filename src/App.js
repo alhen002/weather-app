@@ -12,13 +12,16 @@ export default function App() {
     defaultValue: [],
   });
   // states
-  const [weather, setWeather] = useState({});
+  const [weather, setWeather] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+
   // computed properties
-  const filteredActivities = activities.filter(
-    (activity) => activity.isForGoodWeather === weather.isGoodWeather
+
+  const filteredActivities = activities?.filter(
+    (activity) => activity.isForGoodWeather === weather?.isGoodWeather
   );
+
   // handlers
   async function handleFetchWeather() {
     setIsLoading(true);
@@ -36,6 +39,7 @@ export default function App() {
         temperature,
       });
     }
+    setIsLoading(false);
   }
 
   function handleAddActivity(activity) {
@@ -49,7 +53,7 @@ export default function App() {
 
   return (
     <div className="App">
-      <List activities={filteredActivities} />
+      <List weather={weather} activities={filteredActivities} />
       <Form onAddActivity={handleAddActivity} />
     </div>
   );
