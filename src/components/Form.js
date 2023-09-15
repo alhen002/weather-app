@@ -4,17 +4,25 @@ import { Fragment } from "react";
 import Heading from "./Heading";
 
 export default function Form({ onAddActivity }) {
+  function addActivity(event) {
+    event.preventDefault();
+
+    const form = new FormData(event.target);
+    const data = Object.fromEntries(form.entries());
+    console.log(data);
+  }
+
   return (
     <Fragment>
       <Heading>This is a weater app</Heading>
-      <form>
+      <form onSubmit={addActivity}>
         <fieldset>
           <legend>Add a new Activity</legend>
           <label id="activityLabel" hmtlfor="activityName">
             Name
           </label>
           <input
-            name="activityName"
+            name="name"
             type="text"
             id="activityName"
             placeholder="mountaineering"
@@ -24,9 +32,10 @@ export default function Form({ onAddActivity }) {
             Good-weather activity:
           </label>
           <input
-            name="goodWeatherActivity"
+            name="isForGoodWeather"
             id="goodWeatherActivity"
             type="checkbox"
+            value="true"
             aria-labelledby="goodWeatherLabel"
           />
         </fieldset>
