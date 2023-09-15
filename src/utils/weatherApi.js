@@ -3,9 +3,18 @@ const URL = "https://example-apis.vercel.app/api/weather";
 export async function fetchWeather() {
   try {
     const response = await fetch(URL);
-    const data = await response.json();
-    console.log(data);
+
+    if (response.ok) {
+      const data = await response.json();
+      return {
+        ...data,
+        error: null,
+      };
+    }
+    throw new Error("Error fetching the Weather.");
   } catch (error) {
-    console.log(error);
+    return {
+      error,
+    };
   }
 }
