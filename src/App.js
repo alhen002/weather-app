@@ -50,7 +50,7 @@ export default function App() {
     setActivities(activities.filter((activity) => activity.id !== id));
   }
 
-  // useEffect
+  // useEffect with Interval Fetch
   useEffect(() => {
     const intervalID = setInterval(() => {
       handleFetchWeather();
@@ -62,6 +62,8 @@ export default function App() {
 
   return (
     <div className="App">
+      {isLoading && <p>loading....</p>}
+      {error && <p>{error.message}</p>}
       {weather ? (
         <Heading>{`${weather?.condition} - ${weather?.temperature} `}</Heading>
       ) : (
