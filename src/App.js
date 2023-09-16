@@ -46,6 +46,10 @@ export default function App() {
     setActivities((prev) => [...prev, { id: uid(), ...activity }]);
   }
 
+  function handleDeleteActivity(id) {
+    setActivities(activities.filter((activity) => activity.id !== id));
+  }
+
   // useEffect
   useEffect(() => {
     handleFetchWeather();
@@ -54,11 +58,15 @@ export default function App() {
   return (
     <div className="App">
       {weather ? (
-        <Heading>{`${weather?.condition} - ${weather.temperature} `}</Heading>
+        <Heading>{`${weather?.condition} - ${weather?.temperature} `}</Heading>
       ) : (
         ""
       )}
-      <List weather={weather} activities={filteredActivities} />
+      <List
+        weather={weather}
+        activities={filteredActivities}
+        onDeleteActivity={handleDeleteActivity}
+      />
       <Form onAddActivity={handleAddActivity} />
     </div>
   );
