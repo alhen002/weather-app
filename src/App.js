@@ -52,7 +52,12 @@ export default function App() {
 
   // useEffect
   useEffect(() => {
-    handleFetchWeather();
+    const intervalID = setInterval(() => {
+      handleFetchWeather();
+    }, 5000);
+    return () => {
+      clearInterval(intervalID);
+    };
   }, []);
 
   return (
