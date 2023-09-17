@@ -1,32 +1,38 @@
+// util imports
 import useLocalStorageState from "use-local-storage-state";
 import { useState, useEffect } from "react";
 import { uid } from "uid";
 import { fetchWeather } from "./utils/weatherApi";
+import React from "react";
+
 // import components
 import Form from "./components/Form";
 import List from "./components/List";
 import Heading from "./components/Heading";
+import { Weather, Activity } from "./types/types";
+
 export default function App() {
   // localStorage
-  const [activities, setActivities] = useLocalStorageState("activities", {
-    defaultValue: [],
-  });
+  const [activities, setActivities] = useLocalStorageState<Activity[]>(
+    "activities",
+    {}
+  );
+
   // states
-  const [weather, setWeather] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [weather, setWeather] = useState<Weather | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState(null);
 
   // computed properties
-
   const filteredActivities = activities?.filter(
-    (activity) => activity.isForGoodWeather === weather?.isGoodWeather
+    (activity) => activity?.isForGoodWeather === weather?.isGoodWeather
   );
 
   // handlers
   async function handleFetchWeather() {
     setIsLoading(true);
     setError(null);
-    const { condition, isGoodWeather, location, temperature, error } =
+    const { condition, location, isGoodWeather, temperature }: Weather | Error =
       await fetchWeather();
 
     if (error) {
@@ -42,12 +48,13 @@ export default function App() {
     setIsLoading(false);
   }
 
-  function handleAddActivity(activity) {
+  function handleAddActivity(activity: Activity) {
     setActivities((prev) => [...prev, { id: uid(), ...activity }]);
   }
 
   function handleDeleteActivity(id) {
-    setActivities(activities.filter((activity) => activity.id !== id));
+    activities &&
+      setActivities(activities.filter((activity) => activity.id !== id));
   }
 
   // useEffect with Interval Fetch

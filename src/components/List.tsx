@@ -1,6 +1,18 @@
 import ListItem from "./ListItem";
+import React from "react";
+import { Weather, Activity } from "../types/types";
 
-export default function List({ activities, weather, onDeleteActivity }) {
+interface ListProps {
+  activities: Activity[];
+  weather: Weather;
+  onDeleteActivity: () => void;
+}
+
+export default function List({
+  activities,
+  weather,
+  onDeleteActivity,
+}: ListProps) {
   return (
     <div>
       <h2>

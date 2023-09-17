@@ -1,22 +1,23 @@
 import { Fragment } from "react";
-
+import React from "react";
 // Importing components
 import Heading from "./Heading";
 
 export default function Form({ onAddActivity }) {
-  function addActivity(event) {
+  function addActivity(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const form = new FormData(event.target);
-
-    const newData = {
-      name: form.get("name"),
-      isForGoodWeather: form.get("isForGoodWeather") ? true : false,
-    };
-
-    onAddActivity(newData);
-    event.target.reset();
-    event.target.name.focus();
+    const form = new FormData(event.target as HTMLFormElement);
+    const { target } = event;
+    if (target) {
+      const newData = {
+        name: form.get("name"),
+        isForGoodWeather: form.get("isForGoodWeather") ? true : false,
+      };
+      onAddActivity(newData);
+      form.reset();
+      form.name.focus();
+    }
   }
 
   return (
@@ -25,7 +26,7 @@ export default function Form({ onAddActivity }) {
       <form onSubmit={addActivity}>
         <fieldset>
           <legend>Add a new Activity</legend>
-          <label id="activityLabel" hmtlfor="activityName">
+          <label id="activityLabel" htmlFor="activityName">
             Name
           </label>
           <input
@@ -35,7 +36,7 @@ export default function Form({ onAddActivity }) {
             placeholder="mountaineering"
             aria-labelledby="activityLabel"
           />
-          <label id="goodWeatherLabel" hmtlfor="goodWeatherActivity">
+          <label id="goodWeatherLabel" htmlFor="goodWeatherActivity">
             Good-weather activity:
           </label>
           <input
