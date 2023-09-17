@@ -9,7 +9,7 @@ import React from "react";
 import Form from "./components/Form";
 import List from "./components/List";
 import Heading from "./components/Heading";
-import { Weather, Activity } from "./types/types";
+import { Weather, Activity, WeatherResponse } from "./types/types";
 
 export default function App() {
   // localStorage
@@ -19,21 +19,27 @@ export default function App() {
   );
 
   // states
-  const [weather, setWeather] = useState<Weather | null>(null);
+  const [weather, setWeather] = useState<Weather | undefined>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string>();
 
   // computed properties
-  const filteredActivities = activities?.filter(
+
+  const filteredActivities: Activity[] | undefined = activities?.filter(
     (activity) => activity?.isForGoodWeather === weather?.isGoodWeather
   );
 
   // handlers
   async function handleFetchWeather() {
     setIsLoading(true);
-    setError(null);
-    const { condition, location, isGoodWeather, temperature }: Weather | Error =
-      await fetchWeather();
+    setError("");
+    const {
+      condition,
+      location,
+      isGoodWeather,
+      temperature,
+      error,
+    }: WeatherResponse = await fetchWeather();
 
     if (error) {
       setError(error.message);
@@ -48,11 +54,14 @@ export default function App() {
     setIsLoading(false);
   }
 
-  function handleAddActivity(activity: Activity) {
-    setActivities((prev) => [...prev, { id: uid(), ...activity }]);
+  function handleAddActivity(activity: Omit<Activity, "id">) {
+    // has all the properties of Activity except id
+    if (activities) {
+      setActivities([...activities, { id: uid(), ...activity }]);
+    }
   }
 
-  function handleDeleteActivity(id) {
+  function handleDeleteActivity(id: string) {
     activities &&
       setActivities(activities.filter((activity) => activity.id !== id));
   }
@@ -70,7 +79,7 @@ export default function App() {
   return (
     <div className="App">
       {isLoading && <p>loading....</p>}
-      {error && <p>{error.message}</p>}
+      {error && <p>{error}</p>}
       {weather ? (
         <Heading>{`${weather?.condition} - ${weather?.temperature} `}</Heading>
       ) : (
@@ -78,7 +87,7 @@ export default function App() {
       )}
       <List
         weather={weather}
-        activities={filteredActivities}
+        activities={filteredActivities ? filteredActivities : activities}
         onDeleteActivity={handleDeleteActivity}
       />
       <Form onAddActivity={handleAddActivity} />

@@ -10,3 +10,7 @@ export interface Weather {
   location: string;
   temperature: string;
 }
+
+export interface WeatherResponse extends Weather {
+  error: Error | null;
+}

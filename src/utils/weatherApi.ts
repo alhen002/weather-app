@@ -1,5 +1,3 @@
-import { Weather } from "../types/types";
-
 const URL = "https://example-apis.vercel.app/api/weather";
 
 export async function fetchWeather() {
@@ -7,10 +5,10 @@ export async function fetchWeather() {
     const response = await fetch(URL);
 
     if (response.ok) {
-      const data: Weather = await response.json();
+      const data = await response.json();
+
       return {
         ...data,
-        error: null,
       };
     }
     throw new Error("Error fetching the Weather.");

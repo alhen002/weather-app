@@ -2,19 +2,29 @@ import { Fragment } from "react";
 import React from "react";
 // Importing components
 import Heading from "./Heading";
+import { Activity } from "../types/types";
 
-export default function Form({ onAddActivity }) {
-  function addActivity(event: React.FormEvent<HTMLFormElement>) {
+interface FormProps {
+  onAddActivity: (activity: Omit<Activity, "id">) => void;
+}
+
+export default function Form({ onAddActivity }: FormProps) {
+  function handleAddActivity(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const form = new FormData(event.target as HTMLFormElement);
-    const { target } = event;
+    const target = event.target as typeof event.target & {
+      name: { value: string };
+      isForGoodWeather: { checked: boolean };
+    };
+    const form = new FormData(target);
+
     if (target) {
       const newData = {
         name: form.get("name"),
         isForGoodWeather: form.get("isForGoodWeather") ? true : false,
       };
       onAddActivity(newData);
+
       form.reset();
       form.name.focus();
     }
@@ -23,7 +33,7 @@ export default function Form({ onAddActivity }) {
   return (
     <Fragment>
       <Heading>This is a weater app</Heading>
-      <form onSubmit={addActivity}>
+      <form onSubmit={handleAddActivity}>
         <fieldset>
           <legend>Add a new Activity</legend>
           <label id="activityLabel" htmlFor="activityName">
