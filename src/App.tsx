@@ -56,14 +56,11 @@ export default function App() {
 
   function handleAddActivity(activity: Omit<Activity, "id">) {
     // has all the properties of Activity except id
-    if (activities) {
-      setActivities([...activities, { id: uid(), ...activity }]);
-    }
+    setActivities([...activities, { id: uid(), ...activity }]);
   }
 
   function handleDeleteActivity(id: string) {
-    activities &&
-      setActivities(activities.filter((activity) => activity.id !== id));
+    setActivities(activities.filter((activity) => activity.id !== id));
   }
 
   // useEffect with Interval Fetch
@@ -78,13 +75,16 @@ export default function App() {
 
   return (
     <div className="App">
-      {isLoading && <p>loading....</p>}
-      {error && <p>{error}</p>}
-      {weather ? (
-        <Heading>{`${weather?.condition} - ${weather?.temperature} `}</Heading>
+      {isLoading ? (
+        <Heading>⏳</Heading>
+      ) : error ? (
+        <Heading>{error}</Heading>
+      ) : weather ? (
+        <Heading>{`${weather?.condition}  ${weather?.temperature}°`}</Heading>
       ) : (
         ""
       )}
+
       <List
         weather={weather}
         activities={filteredActivities}

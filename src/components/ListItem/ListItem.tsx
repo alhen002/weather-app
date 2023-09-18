@@ -9,7 +9,7 @@ export default function ListItem({
   onDeleteActivity,
 }: ListItemProps) {
   return (
-    <li>
+    <li className="list__item">
       <p>{activity.name}</p>
       <button
         onClick={() => {

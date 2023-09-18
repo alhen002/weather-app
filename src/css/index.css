@@ -1,8 +1,15 @@
 /* config */
 @import "./reset.css";
 @import "./properties.css";
+@import "./fonts.css";
 /* components */
 @import "../components/Form/Form.css";
 @import "../components/Heading/Heading.css";
 @import "../components/List/List.css";
 @import "../components/ListItem/ListItem.css";
+@import "../components/Paragraph/Paragraph.css";
+
+.App {
+  margin-inline: auto;
+  max-width: 80ch;
+}

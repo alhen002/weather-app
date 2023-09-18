@@ -15,9 +15,8 @@ export default function Form({ onAddActivity }: FormProps) {
   //handlers
   function handleAddActivity(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    console.log(event.target);
     const form = new FormData(event.target as HTMLFormElement);
-    console.log(form);
+
     const name = form.get("name") as string;
     const isForGoodWeather = form.get("isForGoodWeather") ? true : false;
 
@@ -25,20 +24,23 @@ export default function Form({ onAddActivity }: FormProps) {
       name,
       isForGoodWeather,
     };
+
     onAddActivity(newData);
-    console.log(newData);
     (event.target as HTMLFormElement).reset();
 
     nameRef.current?.focus();
   }
 
   return (
-    <Fragment>
-      <Heading>This is a weater app</Heading>
-      <form onSubmit={handleAddActivity}>
-        <fieldset>
-          <legend>Add a new Activity</legend>
-          <label id="activityLabel" htmlFor="activityName">
+    <div className="container">
+      <form className="form" onSubmit={handleAddActivity}>
+        <fieldset className="form__fieldset">
+          <legend className="form__subtitle">Add a new Activity</legend>
+          <label
+            className="form__label"
+            id="activityLabel"
+            htmlFor="activityName"
+          >
             Name
           </label>
           <input
@@ -49,7 +51,11 @@ export default function Form({ onAddActivity }: FormProps) {
             placeholder="mountaineering"
             aria-labelledby="activityLabel"
           />
-          <label id="goodWeatherLabel" htmlFor="goodWeatherActivity">
+          <label
+            className="form__label"
+            id="goodWeatherLabel"
+            htmlFor="goodWeatherActivity"
+          >
             Good-weather activity:
           </label>
           <input
@@ -59,8 +65,10 @@ export default function Form({ onAddActivity }: FormProps) {
             aria-labelledby="goodWeatherLabel"
           />
         </fieldset>
-        <button type="submit">Submit</button>
+        <button className="form__button" type="submit">
+          Submit
+        </button>
       </form>
-    </Fragment>
+    </div>
   );
 }

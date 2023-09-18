@@ -24,3 +24,8 @@
   --fs-300: 1rem;
   --fs-200: 0.875rem;
 }
+
+.container {
+  margin-inline: auto;
+  max-width: 80ch;
+}

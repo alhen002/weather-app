@@ -1,6 +1,7 @@
 import ListItem from "../ListItem/ListItem";
 import React from "react";
 import { Weather, Activity } from "../../types/types";
+import Paragraph from "../Paragraph/Paragraph";
 
 interface ListProps {
   activities: Activity[] | undefined;
@@ -15,12 +16,12 @@ export default function List({
 }: ListProps) {
   return (
     <div>
-      <h2>
+      <Paragraph>
         {weather?.isGoodWeather
-          ? "Activities for really good weather"
-          : "Weather is shitty. stay inside and enjoy xbox gold"}
-      </h2>
-      <ul>
+          ? "Pack your Stuff. It's good weather!"
+          : "Bad Weather. Time for indoor activities!"}
+      </Paragraph>
+      <ul className="list container">
         {activities?.map((activity) => (
           <ListItem
             key={activity.id}
