@@ -3,12 +3,11 @@ import useLocalStorageState from "use-local-storage-state";
 import { useState, useEffect } from "react";
 import { uid } from "uid";
 import { fetchWeather } from "./utils/weatherApi";
-import React from "react";
 
 // import components
-import Form from "./components/Form";
-import List from "./components/List";
-import Heading from "./components/Heading";
+import Form from "./components/Form/Form";
+import List from "./components/List/List";
+import Heading from "./components/Heading/Heading";
 import { Weather, Activity, WeatherResponse } from "./types/types";
 
 export default function App() {
@@ -56,14 +55,11 @@ export default function App() {
 
   function handleAddActivity(activity: Omit<Activity, "id">) {
     // has all the properties of Activity except id
-    if (activities) {
-      setActivities([...activities, { id: uid(), ...activity }]);
-    }
+    setActivities([...activities, { id: uid(), ...activity }]);
   }
 
   function handleDeleteActivity(id: string) {
-    activities &&
-      setActivities(activities.filter((activity) => activity.id !== id));
+    setActivities(activities.filter((activity) => activity.id !== id));
   }
 
   // useEffect with Interval Fetch
@@ -78,13 +74,16 @@ export default function App() {
 
   return (
     <div className="App">
-      {isLoading && <p>loading....</p>}
-      {error && <p>{error}</p>}
-      {weather ? (
-        <Heading>{`${weather?.condition} - ${weather?.temperature} `}</Heading>
+      {isLoading ? (
+        <Heading>⏳</Heading>
+      ) : error ? (
+        <Heading>{error}</Heading>
+      ) : weather ? (
+        <Heading>{`${weather?.condition}  ${weather?.temperature}°`}</Heading>
       ) : (
         ""
       )}
+
       <List
         weather={weather}
         activities={filteredActivities}
