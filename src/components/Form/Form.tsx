@@ -42,28 +42,29 @@ export default function Form({ onAddActivity }: FormProps) {
             htmlFor="activityName"
           >
             Name
+            <input
+              ref={nameRef}
+              name="name"
+              type="text"
+              id="activityName"
+              placeholder="mountaineering"
+              aria-labelledby="activityLabel"
+            />
           </label>
-          <input
-            ref={nameRef}
-            name="name"
-            type="text"
-            id="activityName"
-            placeholder="mountaineering"
-            aria-labelledby="activityLabel"
-          />
+
           <label
             className="form__label"
             id="goodWeatherLabel"
             htmlFor="goodWeatherActivity"
           >
             Good-weather activity:
+            <input
+              name="isForGoodWeather"
+              id="goodWeatherActivity"
+              type="checkbox"
+              aria-labelledby="goodWeatherLabel"
+            />
           </label>
-          <input
-            name="isForGoodWeather"
-            id="goodWeatherActivity"
-            type="checkbox"
-            aria-labelledby="goodWeatherLabel"
-          />
         </fieldset>
         <button className="form__button" type="submit">
           Submit
