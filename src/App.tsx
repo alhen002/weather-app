@@ -6,9 +6,9 @@ import { fetchWeather } from "./utils/weatherApi";
 import React from "react";
 
 // import components
-import Form from "./components/Form";
-import List from "./components/List";
-import Heading from "./components/Heading";
+import Form from "./components/Form/Form";
+import List from "./components/List/List";
+import Heading from "./components/Heading/Heading";
 import { Weather, Activity, WeatherResponse } from "./types/types";
 
 export default function App() {

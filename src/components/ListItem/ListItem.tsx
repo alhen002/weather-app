@@ -1,5 +1,5 @@
 import React from "react";
-import { Activity } from "../types/types";
+import { Activity } from "../../types/types";
 interface ListItemProps {
   activity: Activity;
   onDeleteActivity: (id: string) => void;

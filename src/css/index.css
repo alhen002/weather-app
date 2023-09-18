@@ -1,0 +1,8 @@
+/* config */
+@import "./reset.css";
+@import "./properties.css";
+/* components */
+@import "../components/Form/Form.css";
+@import "../components/Heading/Heading.css";
+@import "../components/List/List.css";
+@import "../components/ListItem/ListItem.css";

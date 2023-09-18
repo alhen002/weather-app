@@ -1,6 +1,6 @@
-import ListItem from "./ListItem";
+import ListItem from "../ListItem/ListItem";
 import React from "react";
-import { Weather, Activity } from "../types/types";
+import { Weather, Activity } from "../../types/types";
 
 interface ListProps {
   activities: Activity[] | undefined;
