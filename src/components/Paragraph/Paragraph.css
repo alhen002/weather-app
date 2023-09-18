@@ -1,0 +1,10 @@
+.paragraph {
+  font-size: 1.6rem;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: rgb(var(--c-dark));
+}

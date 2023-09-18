@@ -6,5 +6,5 @@ interface HeadingProps {
 }
 
 export default function Heading({ children }: HeadingProps) {
-  return <h1>{children}</h1>;
+  return <h1 className="heading container">{children}</h1>;
 }
