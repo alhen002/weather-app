@@ -6,9 +6,9 @@ export async function fetchWeather() {
 
     if (response.ok) {
       const data = await response.json();
+
       return {
         ...data,
-        error: null,
       };
     }
     throw new Error("Error fetching the Weather.");
