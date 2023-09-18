@@ -3,7 +3,6 @@ import useLocalStorageState from "use-local-storage-state";
 import { useState, useEffect } from "react";
 import { uid } from "uid";
 import { fetchWeather } from "./utils/weatherApi";
-import React from "react";
 
 // import components
 import Form from "./components/Form/Form";

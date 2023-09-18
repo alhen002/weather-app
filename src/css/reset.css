@@ -20,6 +20,7 @@ p,
 figure,
 picture {
   margin: 0;
+  padding: 0;
 }
 
 /* Set font-weight to 400 */

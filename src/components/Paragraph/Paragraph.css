@@ -1,6 +1,10 @@
 .paragraph {
   font-size: 1.6rem;
-  line-height: 1.5;
-  margin-bottom: 1.5rem;
+}
+
+.subtitle {
   text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: rgb(var(--c-dark));
 }

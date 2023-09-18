@@ -16,12 +16,12 @@ export default function List({
 }: ListProps) {
   return (
     <div>
-      <Paragraph>
+      <Paragraph className="subtitle">
         {weather?.isGoodWeather
           ? "Pack your Stuff. It's good weather!"
           : "Bad Weather. Time for indoor activities!"}
       </Paragraph>
-      <ul className="list container">
+      <ul className="list">
         {activities?.map((activity) => (
           <ListItem
             key={activity.id}

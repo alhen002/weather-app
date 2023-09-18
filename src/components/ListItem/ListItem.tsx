@@ -1,5 +1,6 @@
 import React from "react";
 import { Activity } from "../../types/types";
+import Paragraph from "../Paragraph/Paragraph";
 interface ListItemProps {
   activity: Activity;
   onDeleteActivity: (id: string) => void;
@@ -10,13 +11,14 @@ export default function ListItem({
 }: ListItemProps) {
   return (
     <li className="list__item">
-      <p>{activity.name}</p>
+      <Paragraph>{activity.name}</Paragraph>
       <button
+        className="list__item__button"
         onClick={() => {
           onDeleteActivity(activity.id);
         }}
       >
-        Delete
+        ❌
       </button>
     </li>
   );
