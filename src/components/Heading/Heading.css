@@ -3,6 +3,7 @@
   padding-block: 1rem;
   margin: 4rem;
   font-size: 6rem;
+  font-family: "Open-Sans";
 }
 
 @media only screen and (min-width: 768px) {
