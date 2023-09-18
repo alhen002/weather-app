@@ -1,8 +1,7 @@
-import { Fragment } from "react";
 import React from "react";
 import { useRef } from "react";
 // Importing components
-import Heading from "../Heading/Heading";
+
 import { Activity } from "../../types/types";
 
 interface FormProps {
