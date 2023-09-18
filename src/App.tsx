@@ -24,8 +24,8 @@ export default function App() {
 
   // computed properties
 
-  const filteredActivities: Activity[] | undefined = activities?.filter(
-    (activity) => activity?.isForGoodWeather === weather?.isGoodWeather
+  const filteredActivities: Activity[] | undefined = activities.filter(
+    (activity) => activity.isForGoodWeather === weather?.isGoodWeather
   );
 
   // handlers
