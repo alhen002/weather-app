@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import React from "react";
+import { useRef } from "react";
 // Importing components
 import Heading from "./Heading";
 import { Activity } from "../types/types";
@@ -9,25 +10,26 @@ interface FormProps {
 }
 
 export default function Form({ onAddActivity }: FormProps) {
+  const nameRef = useRef<HTMLInputElement>(null);
+
+  //handlers
   function handleAddActivity(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    console.log(event.target);
+    const form = new FormData(event.target as HTMLFormElement);
+    console.log(form);
+    const name = form.get("name") as string;
+    const isForGoodWeather = form.get("isForGoodWeather") ? true : false;
 
-    const target = event.target as typeof event.target & {
-      name: { value: string };
-      isForGoodWeather: { checked: boolean };
+    const newData = {
+      name,
+      isForGoodWeather,
     };
-    const form = new FormData(target);
+    onAddActivity(newData);
+    console.log(newData);
+    (event.target as HTMLFormElement).reset();
 
-    if (target) {
-      const newData = {
-        name: form.get("name"),
-        isForGoodWeather: form.get("isForGoodWeather") ? true : false,
-      };
-      onAddActivity(newData);
-
-      form.reset();
-      form.name.focus();
-    }
+    nameRef.current?.focus();
   }
 
   return (
@@ -40,6 +42,7 @@ export default function Form({ onAddActivity }: FormProps) {
             Name
           </label>
           <input
+            ref={nameRef}
             name="name"
             type="text"
             id="activityName"

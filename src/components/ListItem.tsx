@@ -1,6 +1,13 @@
 import React from "react";
-
-export default function ListItem({ activity, onDeleteActivity }) {
+import { Activity } from "../types/types";
+interface ListItemProps {
+  activity: Activity;
+  onDeleteActivity: (id: string) => void;
+}
+export default function ListItem({
+  activity,
+  onDeleteActivity,
+}: ListItemProps) {
   return (
     <li>
       <p>{activity.name}</p>

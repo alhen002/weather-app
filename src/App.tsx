@@ -15,7 +15,7 @@ export default function App() {
   // localStorage
   const [activities, setActivities] = useLocalStorageState<Activity[]>(
     "activities",
-    {}
+    { defaultValue: [] }
   );
 
   // states
@@ -87,7 +87,7 @@ export default function App() {
       )}
       <List
         weather={weather}
-        activities={filteredActivities ? filteredActivities : activities}
+        activities={filteredActivities}
         onDeleteActivity={handleDeleteActivity}
       />
       <Form onAddActivity={handleAddActivity} />
